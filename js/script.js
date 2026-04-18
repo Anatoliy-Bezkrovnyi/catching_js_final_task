@@ -84,3 +84,24 @@ do {
 	count_1 += 1;
 } while (count_1 < 5);
 
+function greet(name) {
+    console.log(`Hello ${name}`);
+}
+
+function notify(name) {
+    console.log(`Dear ${name}, your room will be ready in 30 minutes`);
+}
+
+function registerCustomer(name, callback) {
+    console.log(`Registering ${name}!`);
+    callback(name);
+}
+
+registerCustomer('Mango', greet);
+registerCustomer('Poly', notify);
+
+const arrayOfNumbers = [1, 2, 3, 4, 5];
+
+const logMessages = (number,index) => console.log(`Index: ${index}, Value: ${number}`);
+
+arrayOfNumbers.forEach(logMessages);
