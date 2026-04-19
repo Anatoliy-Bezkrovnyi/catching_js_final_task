@@ -1,107 +1,98 @@
 'use strict';
 
-const a = 5;
-const b = 10;
 
-console.log(a+b);
+const images = [
+  {
+    preview:
+      'https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820__480.jpg',
+    original:
+      'https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820_1280.jpg',
+    description: 'Hokkaido Flower',
+  },
+  {
+    preview:
+      'https://cdn.pixabay.com/photo/2019/05/14/22/05/container-4203677__340.jpg',
+    original:
+      'https://cdn.pixabay.com/photo/2019/05/14/22/05/container-4203677_1280.jpg',
+    description: 'Container Haulage Freight',
+  },
+  {
+    preview:
+      'https://cdn.pixabay.com/photo/2019/05/16/09/47/beach-4206785__340.jpg',
+    original:
+      'https://cdn.pixabay.com/photo/2019/05/16/09/47/beach-4206785_1280.jpg',
+    description: 'Aerial Beach View',
+  },
+  {
+    preview:
+      'https://cdn.pixabay.com/photo/2016/11/18/16/19/flowers-1835619__340.jpg',
+    original:
+      'https://cdn.pixabay.com/photo/2016/11/18/16/19/flowers-1835619_1280.jpg',
+    description: 'Flower Blooms',
+  },
+  {
+    preview:
+      'https://cdn.pixabay.com/photo/2018/09/13/10/36/mountains-3674334__340.jpg',
+    original:
+      'https://cdn.pixabay.com/photo/2018/09/13/10/36/mountains-3674334_1280.jpg',
+    description: 'Alpine Mountains',
+  },
+  {
+    preview:
+      'https://cdn.pixabay.com/photo/2019/05/16/23/04/landscape-4208571__340.jpg',
+    original:
+      'https://cdn.pixabay.com/photo/2019/05/16/23/04/landscape-4208571_1280.jpg',
+    description: 'Mountain Lake Sailing',
+  },
+  {
+    preview:
+      'https://cdn.pixabay.com/photo/2019/05/17/09/27/the-alps-4209272__340.jpg',
+    original:
+      'https://cdn.pixabay.com/photo/2019/05/17/09/27/the-alps-4209272_1280.jpg',
+    description: 'Alpine Spring Meadows',
+  },
+  {
+    preview:
+      'https://cdn.pixabay.com/photo/2019/05/16/21/10/landscape-4208255__340.jpg',
+    original:
+      'https://cdn.pixabay.com/photo/2019/05/16/21/10/landscape-4208255_1280.jpg',
+    description: 'Nature Landscape',
+  },
+  {
+    preview:
+      'https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843__340.jpg',
+    original:
+      'https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843_1280.jpg',
+    description: 'Lighthouse Coast Sea',
+  },
+];
 
-const username = 'Mango';
-const age = 41;
-const message = `My name is ${username} and I'm ${age} years old`;
+const imageGallery = document.querySelector(".gallery");
 
-console.log(message);
+const galleryImageMarkup = images
+  .map(({ preview, original, description }) => `<li class="gallery-item">
+  <a class="gallery-link" href="${original} ">
+    <img
+      class="gallery-image"
+      src="${preview}"
+      data-source="${original}"
+      alt="${description}"
+    />
+  </a>
+</li>`)
+  .join("");
 
-const productName = 'Repair droid';
+imageGallery.insertAdjacentHTML("afterbegin", galleryImageMarkup);
 
-console.log(productName.length);
+imageGallery.addEventListener("click", (event) => {
+    event.preventDefault();
+    if (event.target.nodeName !== "IMG") {
+        return;
+    } else { 
+        const instance = basicLightbox.create(`
+    <img src="${event.target.dataset.source}">
+`)
 
-
-function consolePrint() {
-    console.log('Training function called');
-}
-
-consolePrint();
-
-function multiply(a, b) {
-    console.log(a * b);
-}
-
-multiply(4, 5);
-
-function makeMessage(username) {
-	console.log(`Hello ${username}`);
-}
-
-makeMessage("Jacob");
-
-const grade = 90;
-
-if (grade >= 90) {
-    console.log('Perfectly')
-} else if (grade >= 80) {
-    console.log('Good')
-} else if (grade >= 70) {
-    console.log('Satisfactorily')
-} else {
-    console.log('Unsatisfactorily')
-}
-
-let type;
-const personage = 17;
-
-personage >= 18 ? type = 'adult' : type = 'child';
-
-console.log(type);
-
-const make = 'BYD';
-
-switch (make) {
-    case 'Audi':
-        console.log('Audi');
-        break;
-    case 'BMW':
-        console.log('BMW');
-        break;
-    case 'Mercedes':
-        console.log('Mercedes');
-        break;
-    default:
-        console.log('Unknown');
-        break;
-}
-
-let count = 0;
-
-while (count < 10) {
-    console.log(count);
-    count += 1;
-}
-
-let count_1 = 0;
-
-do {
-	console.log(`Count: ${count_1}`);
-	count_1 += 1;
-} while (count_1 < 5);
-
-function greet(name) {
-    console.log(`Hello ${name}`);
-}
-
-function notify(name) {
-    console.log(`Dear ${name}, your room will be ready in 30 minutes`);
-}
-
-function registerCustomer(name, callback) {
-    console.log(`Registering ${name}!`);
-    callback(name);
-}
-
-registerCustomer('Mango', greet);
-registerCustomer('Poly', notify);
-
-const arrayOfNumbers = [1, 2, 3, 4, 5];
-
-const logMessages = (number,index) => console.log(`Index: ${index}, Value: ${number}`);
-
-arrayOfNumbers.forEach(logMessages);
+instance.show()
+    }
+});
